@@ -13,7 +13,7 @@
           </p>
           <!-- add event listener to the button element -->
           <button class="btn btn-primary m-2">Add 1</button>
-          <p>The button has been clicked {{}} times.</p>
+          <p>The button has been clicked {{state.counter}} times.</p>
         </div>
         <div class="border p-1">
           <h5>Events Calling A Method</h5>
@@ -26,7 +26,7 @@
             "greeting" property and pass its value into an alert().
           </p>
           <!-- add event listener to the button element -->
-          <button class="btn btn-primary m-2">Greet</button>
+          <button @click="greet()" class="btn btn-primary m-2">Greet</button>
         </div>
       </div>
     </div>
@@ -36,18 +36,26 @@
 
 <script>
 import { reactive } from "vue";
+import App from "../App.vue";
 export default {
   name: "events-exercise",
   setup() {
     // NOTE typically state will be abstracted to a global AppState
     const state = reactive({
-      //add property called "counter"
-      //add property called "greeting"
-      //create a method called "greet"
+      counter: 0,
+      greeting: "Hi Jeremy, My code didn't brake!",
     });
     return {
       state,
       // Add your methods here
+      add(amount) {
+        let count = state.counter
+        count += amount
+      },
+      greet() {
+        let phrase = state.greeting
+        window.alert(phrase)
+      }
     };
   },
   components: {},
